@@ -29,7 +29,7 @@ firebaseAppScript.onload = () => {
     dbScript.onload = () => {
 
       const firebaseConfig = {
-        apiKey: "YOUR_FIREBASE_API_KEY",
+        apiKey: "AIzaSyB73bRjhAJmaJshFGRa4MFM8c0RW9mf0CA",
         authDomain: "my-health-journey-16b4f.firebaseapp.com",
         projectId: "my-health-journey-16b4f",
         storageBucket: "my-health-journey-16b4f.firebasestorage.app",
