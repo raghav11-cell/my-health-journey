@@ -2,281 +2,396 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="My Health Journey - Your personal health and daily routine tracker.">
-  <title>My Health Journey</title>
-  <link rel="manifest" href="manifest.webmanifest">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="My Health Journey personal health tracker">
+<title>My Health Journey</title>
+<link rel="manifest" href="manifest.webmanifest">
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7f8;
-      color: #18251f;
-      line-height: 1.5;
-    }
-    header {
-      background: white;
-      padding: 18px 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #e8ece9;
-      position: sticky;
-      top: 0;
-      z-index: 5;
-    }
-    .brand { font-size: 20px; font-weight: 800; color: #176b4b; }
-    .container { width: 92%; max-width: 900px; margin: 25px auto; }
-    .hidden { display: none !important; }
-    .card {
-      background: white;
-      padding: 22px;
-      border-radius: 17px;
-      margin-bottom: 18px;
-      box-shadow: 0 3px 15px rgba(0,0,0,.035);
-    }
-    h1 { font-size: 27px; margin-bottom: 8px; }
-    h2 { font-size: 19px; margin-bottom: 14px; }
-    p { color: #718078; margin-bottom: 12px; }
-    label { display: block; font-weight: 600; margin: 12px 0 6px; }
-    input, textarea {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #dce5df;
-      border-radius: 10px;
-      font-size: 15px;
-      background: white;
-      color: #18251f;
-    }
-    textarea { min-height: 110px; resize: vertical; }
-    button {
-      border: none;
-      border-radius: 10px;
-      padding: 13px 18px;
-      background: #176b4b;
-      color: white;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      margin-top: 12px;
-    }
-    button.secondary { background: #eaf3ee; color: #176b4b; }
-    button.danger { background: #fff0ef; color: #b33b32; }
-    button.full { width: 100%; }
-    .switch {
-      color: #176b4b;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-    .welcome {
-      background: #176b4b;
-      color: white;
-      padding: 25px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-    }
-    .welcome p { color: #dceee5; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-    .habit-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 0;
-      border-bottom: 1px solid #edf0ee;
-    }
-    .habit-item input { width: 19px; height: 19px; }
-    .habit-item span { margin: 0; }
-    iframe {
-      border: none;
-      border-radius: 12px;
-      margin: 8px 0 16px;
-    }
-    #saveStatus { color: #176b4b; font-size: 13px; margin-top: 10px; }
-    .small { font-size: 13px; }
-    footer { text-align: center; padding: 25px; color: #89948e; }
-    @media(max-width:600px) {
-      .grid { grid-template-columns: 1fr; }
-      h1 { font-size: 23px; }
-      .card { padding: 18px; }
-    }
-  </style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f5f7f6;color:#17251e}
+button,input,textarea{font:inherit}
+.hidden{display:none!important}
+
+header{
+ background:white;padding:17px 20px;
+ display:flex;justify-content:space-between;
+ align-items:center;border-bottom:1px solid #e9eeeb;
+ position:sticky;top:0;z-index:5
+}
+.brand{font-weight:800;color:#176b4b;font-size:19px}
+.header-label{font-size:11px;color:#7b8981}
+
+.container{max-width:700px;margin:auto;padding:20px 16px 105px}
+.card{
+ background:white;padding:19px;border-radius:17px;
+ margin-bottom:15px;box-shadow:0 3px 15px #00000008
+}
+h1{font-size:25px;margin-bottom:7px}
+h2{font-size:19px;margin-bottom:12px}
+h3{font-size:16px;margin-bottom:8px}
+p{color:#78857e;font-size:14px;line-height:1.5;margin-bottom:10px}
+
+.welcome{
+ background:#176b4b;color:white;padding:25px;
+ border-radius:19px;margin-bottom:18px
+}
+.welcome p{color:#dceee5}
+.welcome h1{font-size:27px}
+
+label{display:block;font-size:14px;font-weight:600;margin:13px 0 7px}
+input,textarea{
+ width:100%;padding:13px;border:1px solid #dce5df;
+ border-radius:10px;background:white;color:#17251e
+}
+textarea{min-height:110px;resize:vertical}
+
+button{
+ border:0;border-radius:10px;padding:13px 17px;
+ background:#176b4b;color:white;font-weight:700;
+ cursor:pointer;margin-top:12px
+}
+button.full{width:100%}
+button.light{background:#eaf3ee;color:#176b4b}
+button.danger{background:#fff0ef;color:#b33b32}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{
+ background:#f0f6f2;padding:15px;border-radius:13px
+}
+.stat strong{display:block;font-size:22px;color:#176b4b}
+.stat span{font-size:12px;color:#75847b}
+
+.quick{
+ display:flex;align-items:center;gap:12px;
+ padding:14px 0;border-bottom:1px solid #edf0ee;
+ cursor:pointer
+}
+.quick:last-child{border:0}
+.quick-icon{
+ width:42px;height:42px;border-radius:12px;
+ background:#eaf3ee;display:grid;place-items:center;
+ font-size:20px
+}
+.quick div p{margin:3px 0 0}
+
+.bottom-nav{
+ position:fixed;bottom:0;left:0;width:100%;
+ background:white;border-top:1px solid #e5ebe7;
+ display:grid;grid-template-columns:repeat(6,1fr);
+ padding:9px 2px calc(9px + env(safe-area-inset-bottom));
+ z-index:10
+}
+.nav-btn{
+ background:transparent;color:#839087;
+ padding:7px 1px;margin:0;border-radius:9px;
+ display:flex;flex-direction:column;align-items:center;
+ gap:4px;font-size:10px;font-weight:600
+}
+.nav-btn span:first-child{font-size:19px}
+.nav-btn.active{color:#176b4b;background:#edf5f0}
+
+.screen-title{margin-bottom:19px}
+.habit-item{
+ display:flex;align-items:center;gap:10px;
+ padding:13px 0;border-bottom:1px solid #edf0ee
+}
+.habit-item input{width:19px;height:19px}
+.habit-item span{font-size:14px}
+iframe{border:0;border-radius:12px;margin:8px 0 16px}
+#saveStatus{color:#176b4b;font-size:13px;margin-top:12px}
+.small{font-size:12px}
+
+@media(min-width:650px){
+ .bottom-nav{max-width:700px;left:50%;transform:translateX(-50%);border:1px solid #e5ebe7;border-radius:17px 17px 0 0}
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="brand">MY HEALTH JOURNEY</div>
-  <span style="font-size:12px;color:#718078">YOUR DAILY COMPANION</span>
+ <div class="brand">MY HEALTH JOURNEY</div>
+ <div class="header-label">YOUR PERSONAL APP</div>
 </header>
 
 <main class="container">
 
-  <!-- LOGIN AND SIGNUP -->
-  <section id="authSection">
+<!-- AUTH -->
+<section id="authSection">
 
-    <div class="card" id="loginBox">
-      <h1>Welcome Back</h1>
-      <p>Login to continue your health journey.</p>
+ <div class="card" id="loginBox">
+  <h1>Welcome Back</h1>
+  <p>Login to continue your journey.</p>
+  <form id="loginForm">
+   <label>Email</label>
+   <input id="loginEmail" type="email" required>
+   <label>Password</label>
+   <input id="loginPassword" type="password" required>
+   <button class="full" type="submit">Login</button>
+  </form>
+  <p style="margin-top:18px">New here?
+   <span onclick="toggleAuth('signup')" style="color:#176b4b;font-weight:bold;cursor:pointer">Create Account</span>
+  </p>
+ </div>
 
-      <form id="loginForm">
-        <label>Email</label>
-        <input id="loginEmail" type="email" required placeholder="Enter your email">
+ <div class="card hidden" id="signupBox">
+  <h1>Create Account</h1>
+  <p>Start your personal health journey.</p>
+  <form id="signupForm">
+   <label>Your Name</label>
+   <input id="signupName" required>
+   <label>Email</label>
+   <input id="signupEmail" type="email" required>
+   <label>Password</label>
+   <input id="signupPassword" type="password" minlength="6" required>
+   <button class="full" type="submit">Create Account</button>
+  </form>
+  <p style="margin-top:18px">Already registered?
+   <span onclick="toggleAuth('login')" style="color:#176b4b;font-weight:bold;cursor:pointer">Login</span>
+  </p>
+ </div>
 
-        <label>Password</label>
-        <input id="loginPassword" type="password" required placeholder="Enter password">
+</section>
 
-        <button class="full" type="submit">Login</button>
-      </form>
+<!-- DASHBOARD -->
+<section id="dashboard" class="hidden">
 
-      <p style="margin-top:18px">
-        New here?
-        <span class="switch" onclick="toggleAuth('signup')">Create Account</span>
-      </p>
+ <!-- HOME -->
+ <section class="app-screen" id="screen-home">
+  <div class="welcome">
+   <p>YOUR PERSONAL SPACE</p>
+   <h1>Hello, <span id="welcomeName">User</span>!</h1>
+   <p>Make today a positive step in your journey.</p>
+  </div>
+
+  <div class="card">
+   <h2>Today's Overview</h2>
+   <div class="grid">
+    <div class="stat">
+     <strong>01</strong>
+     <span>Daily Journey</span>
     </div>
-
-    <div class="card hidden" id="signupBox">
-      <h1>Create Account</h1>
-      <p>Start building your own healthy routine.</p>
-
-      <form id="signupForm">
-        <label>Your Name</label>
-        <input id="signupName" required placeholder="Enter your name">
-
-        <label>Email</label>
-        <input id="signupEmail" type="email" required placeholder="Enter email">
-
-        <label>Password</label>
-        <input id="signupPassword" type="password" minlength="6" required placeholder="Minimum 6 characters">
-
-        <button class="full" type="submit">Create Account</button>
-      </form>
-
-      <p style="margin-top:18px">
-        Already registered?
-        <span class="switch" onclick="toggleAuth('login')">Login</span>
-      </p>
+    <div class="stat">
+     <strong>06</strong>
+     <span>App Sections</span>
     </div>
+   </div>
+  </div>
 
-  </section>
+  <div class="card">
+   <h2>Explore Your Journey</h2>
 
-  <!-- DASHBOARD -->
-  <section id="dashboard" class="hidden">
+   <div class="quick" onclick="showScreen('plan')">
+    <div class="quick-icon">📅</div>
+    <div><h3>My Daily Plan</h3><p>Create your daily routine</p></div>
+   </div>
 
-    <div class="welcome">
-      <p>YOUR PERSONAL SPACE</p>
-      <h1>Hello, <span id="welcomeName">User</span>!</h1>
-      <p>Small steps every day make a difference.</p>
+   <div class="quick" onclick="showScreen('running')">
+    <div class="quick-icon">🏃</div>
+    <div><h3>Running Tracker</h3><p>Record your running activity</p></div>
+   </div>
+
+   <div class="quick" onclick="showScreen('habits')">
+    <div class="quick-icon">✓</div>
+    <div><h3>Daily Habits</h3><p>Track your daily habits</p></div>
+   </div>
+
+   <div class="quick" onclick="showScreen('music')">
+    <div class="quick-icon">🎵</div>
+    <div><h3>My Music</h3><p>Your Spotify playlists</p></div>
+   </div>
+  </div>
+ </section>
+
+ <!-- PLAN -->
+ <section class="app-screen hidden" id="screen-plan">
+  <div class="screen-title">
+   <h1>My Daily Plan</h1>
+   <p>Plan your day at your own pace.</p>
+  </div>
+  <div class="card">
+   <h2>Today's Routine</h2>
+   <label>My Personal Plan</label>
+   <textarea id="dailyPlan" placeholder="Write your daily routine here..."></textarea>
+   <button id="savePlanBtn" class="full">Save My Plan</button>
+  </div>
+ </section>
+
+ <!-- RUNNING -->
+ <section class="app-screen hidden" id="screen-running">
+  <div class="screen-title">
+   <h1>Running Tracker</h1>
+   <p>Record your physical activity.</p>
+  </div>
+  <div class="card">
+   <h2>Activity Record</h2>
+   <label>Start Time</label>
+   <input type="time" id="runningTime">
+
+   <div class="grid">
+    <div>
+     <label>Duration (minutes)</label>
+     <input type="number" id="runningDuration" min="0" placeholder="Minutes">
     </div>
-
-    <!-- DAILY PLAN -->
-    <div class="card">
-      <h2>My Daily Plan</h2>
-      <p>Write your personal daily routine and goals.</p>
-
-      <label>Today's Plan</label>
-      <textarea id="dailyPlan" placeholder="Example: Morning walk, study, healthy meals, reading..."></textarea>
-
-      <button id="savePlanBtn">Save My Plan</button>
+    <div>
+     <label>Distance (km)</label>
+     <input type="number" id="runningDistance" min="0" step="0.1" placeholder="KM">
     </div>
+   </div>
+   <button id="saveRunningBtn" class="full">Save Running Record</button>
+  </div>
+ </section>
 
-    <!-- RUNNING -->
-    <div class="card">
-      <h2>Morning Running Tracker</h2>
-      <p>Record your running activity whenever you exercise.</p>
+ <!-- HABITS -->
+ <section class="app-screen hidden" id="screen-habits">
+  <div class="screen-title">
+   <h1>Daily Habits</h1>
+   <p>Build routines that work for you.</p>
+  </div>
+  <div class="card">
+   <h2>My Habits</h2>
+   <label>Add New Habit</label>
+   <input id="habitInput" placeholder="Example: Reading, walking...">
+   <button id="saveHabitBtn" class="full">Add Habit</button>
+   <div id="habitList" style="margin-top:15px"></div>
+  </div>
+ </section>
 
-      <label>Running Start Time</label>
-      <input type="time" id="runningTime">
+ <!-- MUSIC -->
+ <section class="app-screen hidden" id="screen-music">
+  <div class="screen-title">
+   <h1>My Music</h1>
+   <p>Listen to your saved Spotify playlists.</p>
+  </div>
+  <div class="card">
+   <h2>Spotify Playlists</h2>
 
-      <div class="grid">
-        <div>
-          <label>Duration (minutes)</label>
-          <input type="number" id="runningDuration" min="0" placeholder="Example: 20">
-        </div>
-        <div>
-          <label>Distance (km)</label>
-          <input type="number" id="runningDistance" min="0" step="0.1" placeholder="Example: 2">
-        </div>
-      </div>
+   <label>Morning Playlist</label>
+   <input id="morningPlaylist" placeholder="Spotify playlist link">
 
-      <button id="saveRunningBtn">Save Running Record</button>
-    </div>
+   <label>Running Playlist</label>
+   <input id="runningPlaylist" placeholder="Spotify playlist link">
 
-    <!-- HABITS -->
-    <div class="card">
-      <h2>Daily Habits</h2>
-      <p>Add habits and tick them when completed.</p>
+   <label>Workout Playlist</label>
+   <input id="workoutPlaylist" placeholder="Spotify playlist link">
 
-      <label>Add a New Habit</label>
-      <input id="habitInput" placeholder="Example: Drink water, read a book">
+   <label>Relaxation Playlist</label>
+   <input id="relaxPlaylist" placeholder="Spotify playlist link">
 
-      <button id="saveHabitBtn">Add Habit</button>
+   <button id="saveSpotifyBtn" class="full">Save Playlists</button>
+   <div id="spotifyPlayers" style="margin-top:18px"></div>
+   <p class="small">Spotify playback may require a Spotify account.</p>
+  </div>
+ </section>
 
-      <div id="habitList" style="margin-top:18px"></div>
-    </div>
+ <!-- PROFILE -->
+ <section class="app-screen hidden" id="screen-profile">
+  <div class="screen-title">
+   <h1>My Profile</h1>
+   <p>Manage your personal account.</p>
+  </div>
+  <div class="card">
+   <h2>Account Details</h2>
+   <p id="profileEmail"></p>
+   <p id="saveStatus">Your account is connected.</p>
+   <button id="logoutBtn" class="danger full">Logout</button>
+  </div>
+ </section>
 
-    <!-- SPOTIFY -->
-    <div class="card">
-      <h2>My Spotify Playlists</h2>
-      <p>Add your Spotify public playlist links.</p>
-
-      <label>Morning Playlist</label>
-      <input id="morningPlaylist" placeholder="Paste Spotify playlist link">
-
-      <label>Running Playlist</label>
-      <input id="runningPlaylist" placeholder="Paste Spotify playlist link">
-
-      <label>Workout Playlist</label>
-      <input id="workoutPlaylist" placeholder="Paste Spotify playlist link">
-
-      <label>Relaxation Playlist</label>
-      <input id="relaxPlaylist" placeholder="Paste Spotify playlist link">
-
-      <button id="saveSpotifyBtn">Save Playlists</button>
-
-      <div id="spotifyPlayers" style="margin-top:20px"></div>
-      <p class="small">Spotify playback may require a Spotify account and may depend on your device and region.</p>
-    </div>
-
-    <!-- ACCOUNT -->
-    <div class="card">
-      <h2>My Account</h2>
-      <p>Your personal data is saved in your account.</p>
-      <p id="saveStatus">Your account is connected.</p>
-      <button id="logoutBtn" class="danger">Logout</button>
-    </div>
-
-  </section>
-
+</section>
 </main>
 
-<footer>
-  My Health Journey © 2026<br>
-  Build healthy habits, one day at a time.
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav hidden" id="bottomNav">
+ <button class="nav-btn active" data-page="home" onclick="showScreen('home')">
+  <span>⌂</span><span>Home</span>
+ </button>
+ <button class="nav-btn" data-page="plan" onclick="showScreen('plan')">
+  <span>▣</span><span>Plan</span>
+ </button>
+ <button class="nav-btn" data-page="running" onclick="showScreen('running')">
+  <span>🏃</span><span>Run</span>
+ </button>
+ <button class="nav-btn" data-page="habits" onclick="showScreen('habits')">
+  <span>✓</span><span>Habits</span>
+ </button>
+ <button class="nav-btn" data-page="music" onclick="showScreen('music')">
+  <span>♫</span><span>Music</span>
+ </button>
+ <button class="nav-btn" data-page="profile" onclick="showScreen('profile')">
+  <span>♙</span><span>Profile</span>
+ </button>
+</nav>
+
+<footer style="text-align:center;padding:20px;color:#87938b;font-size:12px">
+ My Health Journey © 2026
 </footer>
 
 <script>
-  function toggleAuth(type) {
-    document.getElementById("loginBox").classList.toggle("hidden", type !== "login");
-    document.getElementById("signupBox").classList.toggle("hidden", type !== "signup");
-  }
+function toggleAuth(type) {
+ document.getElementById("loginBox").classList.toggle("hidden",type!=="login");
+ document.getElementById("signupBox").classList.toggle("hidden",type!=="signup");
+}
 
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js").catch(() => {});
-    });
+function showScreen(page) {
+ document.querySelectorAll(".app-screen").forEach(s=>s.classList.add("hidden"));
+ document.getElementById("screen-"+page)?.classList.remove("hidden");
+
+ document.querySelectorAll(".nav-btn").forEach(b=>{
+  b.classList.toggle("active",b.dataset.page===page);
+ });
+
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+const originalShowDashboard = () => {
+ document.getElementById("bottomNav").classList.remove("hidden");
+ showScreen("home");
+};
+
+document.addEventListener("DOMContentLoaded",()=>{
+ const observer = new MutationObserver(()=>{
+  const dashboard=document.getElementById("dashboard");
+  const nav=document.getElementById("bottomNav");
+  if(dashboard && !dashboard.classList.contains("hidden")){
+   nav.classList.remove("hidden");
+  }else{
+   nav.classList.add("hidden");
   }
+ });
+ observer.observe(document.getElementById("dashboard"),{
+  attributes:true,attributeFilter:["class"]
+ });
+});
+
+if("serviceWorker" in navigator){
+ window.addEventListener("load",()=>{
+  navigator.serviceWorker.register("./sw.js").catch(()=>{});
+ });
+}
 </script>
 
 <script src="firebase.js"></script>
 <script src="app.js"></script>
 
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+ const email=document.getElementById("profileEmail");
+ if(email){
+  const updateEmail=()=>{
+   if(window.auth?.currentUser){
+    email.textContent=window.auth.currentUser.email;
+   }
+  };
+  window.addEventListener("firebase-ready",updateEmail);
+  setTimeout(updateEmail,1500);
+ }
+});
+</script>
+
 </body>
-</html>
+   </html>
+   
