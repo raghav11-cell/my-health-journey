@@ -5,107 +5,453 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#ffffff">
-<meta name="description" content="My Health Journey personal health tracker">
+<meta name="description" content="My Health Journey - Your personal wellness space">
 <title>My Health Journey</title>
 <link rel="manifest" href="manifest.webmanifest">
 
 <style>
+:root {
+ --primary:#8174e8;
+ --primary-dark:#6b5bd5;
+ --blue:#82b9f5;
+ --lavender:#f0edff;
+ --sky:#eaf5ff;
+ --pink:#fff0f6;
+ --text:#292943;
+ --muted:#9292a8;
+ --border:#eeedf5;
+ --white:#ffffff;
+ --shadow:0 8px 30px rgba(105,91,180,.07);
+}
+
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#f5f7f6;color:#17251e}
+
+body{
+ font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+ background:#fafaff;
+ color:var(--text);
+ min-height:100vh;
+}
+
 button,input,textarea{font:inherit}
+button{cursor:pointer}
 .hidden{display:none!important}
 
 header{
- background:white;padding:17px 20px;
- display:flex;justify-content:space-between;
- align-items:center;border-bottom:1px solid #e9eeeb;
- position:sticky;top:0;z-index:5
+ position:sticky;
+ top:0;
+ z-index:20;
+ background:rgba(255,255,255,.88);
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid var(--border);
+ padding:16px 20px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
 }
-.brand{font-weight:800;color:#176b4b;font-size:19px}
-.header-label{font-size:11px;color:#7b8981}
 
-.container{max-width:700px;margin:auto;padding:20px 16px 105px}
+.brand{
+ font-size:17px;
+ font-weight:850;
+ letter-spacing:-.5px;
+ color:#6558c7;
+}
+
+.header-label{
+ font-size:10px;
+ color:var(--muted);
+ letter-spacing:1px;
+ font-weight:700;
+}
+
+.container{
+ width:100%;
+ max-width:720px;
+ margin:auto;
+ padding:22px 17px 115px;
+}
+
 .card{
- background:white;padding:19px;border-radius:17px;
- margin-bottom:15px;box-shadow:0 3px 15px #00000008
+ background:white;
+ border:1px solid #f0eff8;
+ border-radius:23px;
+ padding:21px;
+ margin-bottom:17px;
+ box-shadow:var(--shadow);
 }
-h1{font-size:25px;margin-bottom:7px}
-h2{font-size:19px;margin-bottom:12px}
-h3{font-size:16px;margin-bottom:8px}
-p{color:#78857e;font-size:14px;line-height:1.5;margin-bottom:10px}
 
-.welcome{
- background:#176b4b;color:white;padding:25px;
- border-radius:19px;margin-bottom:18px
+h1{
+ font-size:27px;
+ line-height:1.2;
+ letter-spacing:-1px;
+ margin-bottom:8px;
 }
-.welcome p{color:#dceee5}
-.welcome h1{font-size:27px}
 
-label{display:block;font-size:14px;font-weight:600;margin:13px 0 7px}
+h2{
+ font-size:18px;
+ letter-spacing:-.4px;
+ margin-bottom:15px;
+}
+
+h3{font-size:15px}
+
+p{
+ color:var(--muted);
+ font-size:13px;
+ line-height:1.65;
+ margin-bottom:9px;
+}
+
+.small{font-size:11px}
+
+label{
+ display:block;
+ font-size:13px;
+ font-weight:700;
+ margin:15px 0 8px;
+ color:#55536f;
+}
+
 input,textarea{
- width:100%;padding:13px;border:1px solid #dce5df;
- border-radius:10px;background:white;color:#17251e
+ width:100%;
+ padding:14px 15px;
+ border:1px solid #e9e8f2;
+ border-radius:13px;
+ outline:none;
+ background:#fcfcff;
+ color:var(--text);
+ transition:.2s;
 }
-textarea{min-height:110px;resize:vertical}
+
+input:focus,textarea:focus{
+ border-color:#a69bf1;
+ box-shadow:0 0 0 4px #8174e815;
+ background:white;
+}
+
+textarea{
+ min-height:125px;
+ resize:vertical;
+}
 
 button{
- border:0;border-radius:10px;padding:13px 17px;
- background:#176b4b;color:white;font-weight:700;
- cursor:pointer;margin-top:12px
+ border:0;
+ border-radius:13px;
+ padding:14px 18px;
+ background:linear-gradient(110deg,#8174e8,#9d91f3);
+ color:white;
+ font-weight:750;
+ font-size:14px;
+ transition:transform .2s,opacity .2s;
+ box-shadow:0 5px 15px #8174e828;
 }
-button.full{width:100%}
-button.light{background:#eaf3ee;color:#176b4b}
-button.danger{background:#fff0ef;color:#b33b32}
 
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat{
- background:#f0f6f2;padding:15px;border-radius:13px
+button:active{transform:scale(.98)}
+button.full{width:100%;margin-top:17px}
+
+button.light{
+ background:#f0edff;
+ color:#7164d4;
+ box-shadow:none;
 }
-.stat strong{display:block;font-size:22px;color:#176b4b}
-.stat span{font-size:12px;color:#75847b}
+
+button.danger{
+ background:#fff0f2;
+ color:#dc687d;
+ box-shadow:none;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+}
+
+.welcome{
+ position:relative;
+ overflow:hidden;
+ padding:27px 23px;
+ border-radius:26px;
+ margin-bottom:19px;
+ background:linear-gradient(125deg,#eeeaff 0%,#e9f4ff 55%,#f9edff 100%);
+}
+
+.welcome:after{
+ content:"";
+ position:absolute;
+ width:170px;
+ height:170px;
+ border-radius:50%;
+ background:rgba(255,255,255,.5);
+ right:-65px;
+ top:-65px;
+}
+
+.welcome-tag{
+ display:inline-block;
+ background:#ffffffa8;
+ color:#786bcf;
+ font-size:10px;
+ letter-spacing:1.2px;
+ font-weight:800;
+ padding:7px 11px;
+ border-radius:20px;
+ margin-bottom:17px;
+}
+
+.welcome h1{
+ color:#45416e;
+ font-size:28px;
+}
+
+.welcome p{color:#77769c}
+
+.welcome-bottom{
+ margin-top:17px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+}
+
+.welcome-note{
+ font-size:12px;
+ font-weight:700;
+ color:#7267c4;
+}
+
+.welcome-decoration{
+ width:48px;
+ height:48px;
+ border-radius:17px;
+ background:#ffffffa8;
+ display:grid;
+ place-items:center;
+ font-size:24px;
+}
+
+.section-heading{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:14px;
+}
+
+.section-heading h2{margin:0}
+
+.section-caption{
+ font-size:11px;
+ color:var(--muted);
+}
+
+.stat{
+ border-radius:18px;
+ padding:17px 14px;
+ background:linear-gradient(140deg,#f0edff,#faf8ff);
+}
+
+.stat.blue{
+ background:linear-gradient(140deg,#eaf5ff,#f8fbff);
+}
+
+.stat.pink{
+ background:linear-gradient(140deg,#fff0f6,#fff9fb);
+}
+
+.stat strong{
+ display:block;
+ font-size:25px;
+ color:#7568d5;
+ margin-bottom:5px;
+}
+
+.stat.blue strong{color:#5796d3}
+.stat.pink strong{color:#d77da3}
+
+.stat span{
+ font-size:11px;
+ color:#85839e;
+ font-weight:650;
+}
 
 .quick{
- display:flex;align-items:center;gap:12px;
- padding:14px 0;border-bottom:1px solid #edf0ee;
- cursor:pointer
+ display:flex;
+ align-items:center;
+ gap:13px;
+ padding:14px 0;
+ border-bottom:1px solid #f1f0f6;
+ cursor:pointer;
 }
-.quick:last-child{border:0}
+
+.quick:last-child{border:0;padding-bottom:0}
+
 .quick-icon{
- width:42px;height:42px;border-radius:12px;
- background:#eaf3ee;display:grid;place-items:center;
- font-size:20px
+ width:46px;
+ height:46px;
+ border-radius:15px;
+ display:grid;
+ place-items:center;
+ font-size:21px;
+ flex-shrink:0;
+ background:#f0edff;
 }
-.quick div p{margin:3px 0 0}
+
+.quick-icon.blue{background:#eaf5ff}
+.quick-icon.pink{background:#fff0f6}
+.quick-icon.green{background:#eaf8f2}
+
+.quick-content{flex:1}
+.quick-content h3{margin-bottom:3px}
+.quick-content p{margin:0;font-size:12px}
+.quick-arrow{color:#aaa5cb;font-size:20px}
+
+.screen-title{
+ margin:8px 0 20px;
+}
+
+.screen-title h1{font-size:27px}
+.screen-title p{font-size:13px}
+
+.page-label{
+ color:#8174e8;
+ font-size:10px;
+ letter-spacing:1.4px;
+ font-weight:800;
+ margin-bottom:9px;
+}
+
+.habit-item{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding:14px 0;
+ border-bottom:1px solid #f0eff5;
+}
+
+.habit-item:last-child{border:0}
+
+.habit-item input{
+ width:19px;
+ height:19px;
+ accent-color:#8174e8;
+}
+
+.habit-item span{
+ font-size:13px;
+ color:#55536f;
+}
 
 .bottom-nav{
- position:fixed;bottom:0;left:0;width:100%;
- background:white;border-top:1px solid #e5ebe7;
- display:grid;grid-template-columns:repeat(6,1fr);
- padding:9px 2px calc(9px + env(safe-area-inset-bottom));
- z-index:10
+ position:fixed;
+ bottom:0;
+ left:0;
+ width:100%;
+ z-index:30;
+ display:grid;
+ grid-template-columns:repeat(6,1fr);
+ background:rgba(255,255,255,.94);
+ backdrop-filter:blur(20px);
+ border-top:1px solid #efedf7;
+ padding:9px 3px calc(9px + env(safe-area-inset-bottom));
 }
-.nav-btn{
- background:transparent;color:#839087;
- padding:7px 1px;margin:0;border-radius:9px;
- display:flex;flex-direction:column;align-items:center;
- gap:4px;font-size:10px;font-weight:600
-}
-.nav-btn span:first-child{font-size:19px}
-.nav-btn.active{color:#176b4b;background:#edf5f0}
 
-.screen-title{margin-bottom:19px}
-.habit-item{
- display:flex;align-items:center;gap:10px;
- padding:13px 0;border-bottom:1px solid #edf0ee
+.nav-btn{
+ margin:0;
+ padding:8px 1px;
+ background:transparent;
+ box-shadow:none;
+ border-radius:13px;
+ color:#a09eb3;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ gap:5px;
+ font-size:10px;
+ font-weight:700;
 }
-.habit-item input{width:19px;height:19px}
-.habit-item span{font-size:14px}
-iframe{border:0;border-radius:12px;margin:8px 0 16px}
-#saveStatus{color:#176b4b;font-size:13px;margin-top:12px}
-.small{font-size:12px}
+
+.nav-btn span:first-child{font-size:19px}
+
+.nav-btn.active{
+ color:#7568d5;
+ background:#f0edff;
+}
+
+iframe{
+ border:0;
+ border-radius:15px;
+ margin:9px 0 16px;
+ width:100%;
+}
+
+#saveStatus{
+ color:#7568d5;
+ font-size:12px;
+ margin-top:13px;
+}
+
+.auth-heading{
+ text-align:center;
+ padding:25px 10px 15px;
+}
+
+.auth-logo{
+ width:65px;
+ height:65px;
+ margin:0 auto 17px;
+ border-radius:23px;
+ display:grid;
+ place-items:center;
+ font-size:29px;
+ background:linear-gradient(140deg,#eeeaff,#eaf5ff);
+}
+
+.auth-heading h1{font-size:29px}
+
+.auth-switch{
+ text-align:center;
+ margin-top:18px;
+}
+
+.auth-switch span{
+ color:#7568d5;
+ font-weight:800;
+ cursor:pointer;
+}
+
+.profile-avatar{
+ width:62px;
+ height:62px;
+ border-radius:22px;
+ background:linear-gradient(140deg,#eeeaff,#eaf5ff);
+ display:grid;
+ place-items:center;
+ font-size:26px;
+ margin-bottom:14px;
+}
+
+footer{
+ text-align:center;
+ padding:15px 10px;
+ color:#aaa8bb;
+ font-size:11px;
+}
 
 @media(min-width:650px){
- .bottom-nav{max-width:700px;left:50%;transform:translateX(-50%);border:1px solid #e5ebe7;border-radius:17px 17px 0 0}
+ .bottom-nav{
+  max-width:700px;
+  left:50%;
+  transform:translateX(-50%);
+  border:1px solid #eeedf5;
+  border-radius:22px 22px 0 0;
+ }
+}
+
+@media(max-width:370px){
+ .nav-btn{font-size:9px}
+ .nav-btn span:first-child{font-size:17px}
+ .container{padding-left:13px;padding-right:13px}
 }
 </style>
 </head>
@@ -113,8 +459,8 @@ iframe{border:0;border-radius:12px;margin:8px 0 16px}
 <body>
 
 <header>
- <div class="brand">MY HEALTH JOURNEY</div>
- <div class="header-label">YOUR PERSONAL APP</div>
+ <div class="brand">✦ MY HEALTH JOURNEY</div>
+ <div class="header-label">YOUR PERSONAL SPACE</div>
 </header>
 
 <main class="container">
@@ -122,36 +468,51 @@ iframe{border:0;border-radius:12px;margin:8px 0 16px}
 <!-- AUTH -->
 <section id="authSection">
 
+ <div class="auth-heading">
+  <div class="auth-logo">✦</div>
+  <h1>Your Journey Starts Here</h1>
+  <p>A little progress every day.</p>
+ </div>
+
  <div class="card" id="loginBox">
-  <h1>Welcome Back</h1>
-  <p>Login to continue your journey.</p>
+  <h2>Welcome Back</h2>
+  <p>Login to continue your personal journey.</p>
+
   <form id="loginForm">
-   <label>Email</label>
-   <input id="loginEmail" type="email" required>
+   <label>Email Address</label>
+   <input id="loginEmail" type="email" placeholder="Enter your email" required>
+
    <label>Password</label>
-   <input id="loginPassword" type="password" required>
-   <button class="full" type="submit">Login</button>
+   <input id="loginPassword" type="password" placeholder="Enter your password" required>
+
+   <button class="full" type="submit">Login to My Space →</button>
   </form>
-  <p style="margin-top:18px">New here?
-   <span onclick="toggleAuth('signup')" style="color:#176b4b;font-weight:bold;cursor:pointer">Create Account</span>
-  </p>
+
+  <div class="auth-switch">
+   <p>New here? <span onclick="toggleAuth('signup')">Create Account</span></p>
+  </div>
  </div>
 
  <div class="card hidden" id="signupBox">
-  <h1>Create Account</h1>
-  <p>Start your personal health journey.</p>
+  <h2>Create Your Account</h2>
+  <p>Start building your personal wellness journey.</p>
+
   <form id="signupForm">
    <label>Your Name</label>
-   <input id="signupName" required>
-   <label>Email</label>
-   <input id="signupEmail" type="email" required>
+   <input id="signupName" placeholder="Enter your name" required>
+
+   <label>Email Address</label>
+   <input id="signupEmail" type="email" placeholder="Enter your email" required>
+
    <label>Password</label>
-   <input id="signupPassword" type="password" minlength="6" required>
-   <button class="full" type="submit">Create Account</button>
+   <input id="signupPassword" type="password" minlength="6" placeholder="At least 6 characters" required>
+
+   <button class="full" type="submit">Create My Account →</button>
   </form>
-  <p style="margin-top:18px">Already registered?
-   <span onclick="toggleAuth('login')" style="color:#176b4b;font-weight:bold;cursor:pointer">Login</span>
-  </p>
+
+  <div class="auth-switch">
+   <p>Already registered? <span onclick="toggleAuth('login')">Login</span></p>
+  </div>
  </div>
 
 </section>
@@ -161,20 +522,30 @@ iframe{border:0;border-radius:12px;margin:8px 0 16px}
 
  <!-- HOME -->
  <section class="app-screen" id="screen-home">
+
   <div class="welcome">
-   <p>YOUR PERSONAL SPACE</p>
+   <div class="welcome-tag">YOUR PERSONAL SPACE</div>
    <h1>Hello, <span id="welcomeName">User</span>!</h1>
-   <p>Make today a positive step in your journey.</p>
+   <p>Every small step counts. Make today yours.</p>
+
+   <div class="welcome-bottom">
+    <div class="welcome-note">One day. One step. One better you.</div>
+    <div class="welcome-decoration">✦</div>
+   </div>
   </div>
 
   <div class="card">
-   <h2>Today's Overview</h2>
+   <div class="section-heading">
+    <h2>Today's Overview</h2>
+    <span class="section-caption">YOUR JOURNEY</span>
+   </div>
+
    <div class="grid">
     <div class="stat">
      <strong>01</strong>
      <span>Daily Journey</span>
     </div>
-    <div class="stat">
+    <div class="stat blue">
      <strong>06</strong>
      <span>App Sections</span>
     </div>
@@ -182,52 +553,86 @@ iframe{border:0;border-radius:12px;margin:8px 0 16px}
   </div>
 
   <div class="card">
-   <h2>Explore Your Journey</h2>
+   <div class="section-heading">
+    <h2>Explore Your Space</h2>
+    <span class="section-caption">QUICK ACCESS</span>
+   </div>
 
    <div class="quick" onclick="showScreen('plan')">
-    <div class="quick-icon">📅</div>
-    <div><h3>My Daily Plan</h3><p>Create your daily routine</p></div>
+    <div class="quick-icon">▤</div>
+    <div class="quick-content">
+     <h3>My Daily Plan</h3>
+     <p>Create and manage your daily routine</p>
+    </div>
+    <div class="quick-arrow">›</div>
    </div>
 
    <div class="quick" onclick="showScreen('running')">
-    <div class="quick-icon">🏃</div>
-    <div><h3>Running Tracker</h3><p>Record your running activity</p></div>
+    <div class="quick-icon blue">↗</div>
+    <div class="quick-content">
+     <h3>Running Tracker</h3>
+     <p>Record your physical activity</p>
+    </div>
+    <div class="quick-arrow">›</div>
    </div>
 
    <div class="quick" onclick="showScreen('habits')">
-    <div class="quick-icon">✓</div>
-    <div><h3>Daily Habits</h3><p>Track your daily habits</p></div>
+    <div class="quick-icon green">✓</div>
+    <div class="quick-content">
+     <h3>Daily Habits</h3>
+     <p>Build routines at your own pace</p>
+    </div>
+    <div class="quick-arrow">›</div>
    </div>
 
    <div class="quick" onclick="showScreen('music')">
-    <div class="quick-icon">🎵</div>
-    <div><h3>My Music</h3><p>Your Spotify playlists</p></div>
+    <div class="quick-icon pink">♫</div>
+    <div class="quick-content">
+     <h3>My Music</h3>
+     <p>Your saved Spotify playlists</p>
+    </div>
+    <div class="quick-arrow">›</div>
    </div>
   </div>
+
  </section>
 
  <!-- PLAN -->
  <section class="app-screen hidden" id="screen-plan">
+
   <div class="screen-title">
+   <div class="page-label">PLAN YOUR DAY</div>
    <h1>My Daily Plan</h1>
-   <p>Plan your day at your own pace.</p>
+   <p>Your day, your priorities, your pace.</p>
   </div>
+
   <div class="card">
+   <div class="quick-icon" style="margin-bottom:15px">▤</div>
    <h2>Today's Routine</h2>
+   <p>Write down the things you want to focus on today.</p>
+
    <label>My Personal Plan</label>
    <textarea id="dailyPlan" placeholder="Write your daily routine here..."></textarea>
-   <button id="savePlanBtn" class="full">Save My Plan</button>
+
+   <button id="savePlanBtn" class="full">Save My Plan →</button>
   </div>
+
  </section>
 
  <!-- RUNNING -->
  <section class="app-screen hidden" id="screen-running">
+
   <div class="screen-title">
+   <div class="page-label">MOVEMENT & ACTIVITY</div>
    <h1>Running Tracker</h1>
-   <p>Record your physical activity.</p>
+   <p>Keep a record of your activity, at your own pace.</p>
   </div>
+
   <div class="card">
+   <div class="quick-icon blue" style="margin-bottom:15px">↗</div>
    <h2>Activity Record</h2>
+   <p>Enter your activity details below.</p>
+
    <label>Start Time</label>
    <input type="time" id="runningTime">
 
@@ -236,38 +641,55 @@ iframe{border:0;border-radius:12px;margin:8px 0 16px}
      <label>Duration (minutes)</label>
      <input type="number" id="runningDuration" min="0" placeholder="Minutes">
     </div>
+
     <div>
      <label>Distance (km)</label>
      <input type="number" id="runningDistance" min="0" step="0.1" placeholder="KM">
     </div>
    </div>
-   <button id="saveRunningBtn" class="full">Save Running Record</button>
+
+   <button id="saveRunningBtn" class="full">Save Activity →</button>
   </div>
+
  </section>
 
  <!-- HABITS -->
  <section class="app-screen hidden" id="screen-habits">
+
   <div class="screen-title">
+   <div class="page-label">SMALL STEPS, DAILY</div>
    <h1>Daily Habits</h1>
    <p>Build routines that work for you.</p>
   </div>
+
   <div class="card">
+   <div class="quick-icon green" style="margin-bottom:15px">✓</div>
    <h2>My Habits</h2>
+   <p>Add the habits you want to track.</p>
+
    <label>Add New Habit</label>
    <input id="habitInput" placeholder="Example: Reading, walking...">
-   <button id="saveHabitBtn" class="full">Add Habit</button>
-   <div id="habitList" style="margin-top:15px"></div>
+
+   <button id="saveHabitBtn" class="full">+ Add Habit</button>
+
+   <div id="habitList" style="margin-top:18px"></div>
   </div>
+
  </section>
 
  <!-- MUSIC -->
  <section class="app-screen hidden" id="screen-music">
+
   <div class="screen-title">
+   <div class="page-label">YOUR SOUNDTRACK</div>
    <h1>My Music</h1>
-   <p>Listen to your saved Spotify playlists.</p>
+   <p>Save your favourite playlists for different moments.</p>
   </div>
+
   <div class="card">
+   <div class="quick-icon pink" style="margin-bottom:15px">♫</div>
    <h2>Spotify Playlists</h2>
+   <p>Add your Spotify playlist links below.</p>
 
    <label>Morning Playlist</label>
    <input id="morningPlaylist" placeholder="Spotify playlist link">
@@ -281,24 +703,37 @@ iframe{border:0;border-radius:12px;margin:8px 0 16px}
    <label>Relaxation Playlist</label>
    <input id="relaxPlaylist" placeholder="Spotify playlist link">
 
-   <button id="saveSpotifyBtn" class="full">Save Playlists</button>
+   <button id="saveSpotifyBtn" class="full">Save My Playlists →</button>
+
    <div id="spotifyPlayers" style="margin-top:18px"></div>
+
    <p class="small">Spotify playback may require a Spotify account.</p>
   </div>
+
  </section>
 
  <!-- PROFILE -->
  <section class="app-screen hidden" id="screen-profile">
+
   <div class="screen-title">
+   <div class="page-label">YOUR ACCOUNT</div>
    <h1>My Profile</h1>
-   <p>Manage your personal account.</p>
+   <p>Your personal account information.</p>
   </div>
+
   <div class="card">
+   <div class="profile-avatar">✦</div>
    <h2>Account Details</h2>
+   <p>Registered email address</p>
    <p id="profileEmail"></p>
+
+   <div style="height:1px;background:#f0eff5;margin:18px 0"></div>
+
    <p id="saveStatus">Your account is connected.</p>
+
    <button id="logoutBtn" class="danger full">Logout</button>
   </div>
+
  </section>
 
 </section>
@@ -306,28 +741,41 @@ iframe{border:0;border-radius:12px;margin:8px 0 16px}
 
 <!-- BOTTOM NAVIGATION -->
 <nav class="bottom-nav hidden" id="bottomNav">
+
  <button class="nav-btn active" data-page="home" onclick="showScreen('home')">
-  <span>⌂</span><span>Home</span>
+  <span>⌂</span>
+  <span>Home</span>
  </button>
+
  <button class="nav-btn" data-page="plan" onclick="showScreen('plan')">
-  <span>▣</span><span>Plan</span>
+  <span>▤</span>
+  <span>Plan</span>
  </button>
+
  <button class="nav-btn" data-page="running" onclick="showScreen('running')">
-  <span>🏃</span><span>Run</span>
+  <span>↗</span>
+  <span>Run</span>
  </button>
+
  <button class="nav-btn" data-page="habits" onclick="showScreen('habits')">
-  <span>✓</span><span>Habits</span>
+  <span>✓</span>
+  <span>Habits</span>
  </button>
+
  <button class="nav-btn" data-page="music" onclick="showScreen('music')">
-  <span>♫</span><span>Music</span>
+  <span>♫</span>
+  <span>Music</span>
  </button>
+
  <button class="nav-btn" data-page="profile" onclick="showScreen('profile')">
-  <span>♙</span><span>Profile</span>
+  <span>♙</span>
+  <span>Profile</span>
  </button>
+
 </nav>
 
-<footer style="text-align:center;padding:20px;color:#87938b;font-size:12px">
- My Health Journey © 2026
+<footer>
+ My Health Journey © 2026 · Made for your everyday progress
 </footer>
 
 <script>
@@ -337,7 +785,10 @@ function toggleAuth(type) {
 }
 
 function showScreen(page) {
- document.querySelectorAll(".app-screen").forEach(s=>s.classList.add("hidden"));
+ document.querySelectorAll(".app-screen").forEach(s=>{
+  s.classList.add("hidden");
+ });
+
  document.getElementById("screen-"+page)?.classList.remove("hidden");
 
  document.querySelectorAll(".nav-btn").forEach(b=>{
@@ -347,24 +798,24 @@ function showScreen(page) {
  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-const originalShowDashboard = () => {
- document.getElementById("bottomNav").classList.remove("hidden");
- showScreen("home");
-};
-
 document.addEventListener("DOMContentLoaded",()=>{
- const observer = new MutationObserver(()=>{
-  const dashboard=document.getElementById("dashboard");
-  const nav=document.getElementById("bottomNav");
+ const dashboard=document.getElementById("dashboard");
+ const nav=document.getElementById("bottomNav");
+
+ const observer=new MutationObserver(()=>{
   if(dashboard && !dashboard.classList.contains("hidden")){
    nav.classList.remove("hidden");
   }else{
    nav.classList.add("hidden");
   }
  });
- observer.observe(document.getElementById("dashboard"),{
-  attributes:true,attributeFilter:["class"]
- });
+
+ if(dashboard){
+  observer.observe(dashboard,{
+   attributes:true,
+   attributeFilter:["class"]
+  });
+ }
 });
 
 if("serviceWorker" in navigator){
@@ -380,12 +831,14 @@ if("serviceWorker" in navigator){
 <script>
 document.addEventListener("DOMContentLoaded",()=>{
  const email=document.getElementById("profileEmail");
+
  if(email){
   const updateEmail=()=>{
    if(window.auth?.currentUser){
     email.textContent=window.auth.currentUser.email;
    }
   };
+
   window.addEventListener("firebase-ready",updateEmail);
   setTimeout(updateEmail,1500);
  }
@@ -393,5 +846,4 @@ document.addEventListener("DOMContentLoaded",()=>{
 </script>
 
 </body>
-   </html>
-   
+</html>
